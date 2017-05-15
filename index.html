@@ -4,10 +4,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>We Want WebAssembly - GOTO Stockholm 2017</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/white.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -20,12 +20,197 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+
+    <style>
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4,
+      .reveal h5,
+      .reveal h6 { color: #654ff0; }
+      .purple { color: #654ff0; }
+    </style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+          <h1>We Want WebAssembly</h1>
+          <h3>GOTO Stockholm 2017</h3>
+          <table>
+            <td>
+              <small>Ben Smith <a href="https://twitter.com/binjimint">@binjimint</a></small>
+            </td>
+            <td>
+              <img class="plain" src="benji2x.png"></img>
+            </td>
+          </table>
+        </section>
+
+        <section>
+          <img class="plain" src="logo.png">
+          <aside class="notes">
+            I work at Google on the Chrome team, on WebAssembly
+          <aside>
+        </section>
+
+        <section>
+          <h1>WABT</h1>
+          (Web Assembly Binary Toolkit)
+          <aside class="notes">
+            My primary contribution is to wabt, the WebAssembly binary toolkit.
+            This is as suite of tools that convert from the WebAssembly text
+            format to the binary format, and back. It also includes an
+            interpreter, a module validator and more.
+          <aside>
+        </section>
+
+        <section>
+          <ol>
+            <li class="purple">WebAssembly Module Overview</li>
+            <li class="purple">New Languages</li>
+            <li class="purple">The Future</li>
+          </ol>
+        </section>
+
+        <section>
+          <h3>A Cartoon intro To WebAssembly</h3>
+          <h4>By Lin Clark</h4>
+          <img class="plain" src="cartoon-webassembly.png">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="logo-sketch.gif">
+        </section>
+
+        <section>
+          <img class="plain" src="web-assembly-name.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <ol>
+            <li class="purple"><b>WebAssembly Module Overview</b></li>
+            <li class="purple">New Languages</li>
+            <li class="purple">The Future</li>
+          </ol>
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="module2.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="functions2.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="function-internals.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="function-calls2.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="function-imports.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="memory.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="memory-internals.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="load-store.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="globals.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="globals-get-set.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="exports.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <ol>
+            <li class="purple">WebAssembly Module Overview</li>
+            <li class="purple"><b>New Languages</b></li>
+            <li class="purple">The Future</li>
+          </ol>
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <h3>TurboScript</h3>
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <h3>speedy.js</h3>
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <ol>
+            <li class="purple">WebAssembly Module Overview</li>
+            <li class="purple">New Languages</li>
+            <li class="purple"><b>The Future</b></li>
+          </ol>
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <h3>Garbage Collection</h3>
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <h3>JIT (Just-In-Time) Support</h3>
+          <aside class="notes">
+          <aside>
+        </section>
+
 			</div>
 		</div>
 
@@ -37,12 +222,23 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+        transition: 'none',
+        controls: true,
+        progress: true,
+				// history: false,
+				history: true,
+        center: true,
+        viewDistance: 1,
+        slideNumber: true,
+
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad();
+    }
+    }
+                                ]
 			});
 		</script>
 	</body>
