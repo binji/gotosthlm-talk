@@ -29,6 +29,10 @@
       .reveal h5,
       .reveal h6 { color: #654ff0; }
       .purple { color: #654ff0; }
+      .reveal .h1size { font-size: 2.5em; }
+      .reveal .h2size { font-size: 1.6em; }
+      .reveal .h3size { font-size: 1.3em; }
+      .reveal .sections { font-weight: 700; }
     </style>
 	</head>
 	<body>
@@ -50,7 +54,8 @@
         <section>
           <img class="plain" src="logo.png">
           <aside class="notes">
-            I work at Google on the Chrome team, on WebAssembly
+            I work at Google on the Chrome team, on WebAssembly. Here's the
+            logo!
           <aside>
         </section>
 
@@ -66,11 +71,17 @@
         </section>
 
         <section>
-          <ol>
-            <li class="purple">WebAssembly Module Overview</li>
-            <li class="purple">New Languages</li>
-            <li class="purple">The Future</li>
+          <ol class="sections">
+            <li>WebAssembly Module Overview</li>
+            <li>New Languages</li>
+            <li>The Future</li>
           </ol>
+          <aside class="notes">
+            For this talk, I wanted to cover a few topics. First, I want to
+            give an overview of a WebAssembly module. Next, I'll talk about
+            some new languages that compile to JavaScript. Finally, I'll talk
+            about some planned features for future versions of WebAssembly.
+          <aside>
         </section>
 
         <section>
@@ -78,87 +89,150 @@
           <h4>By Lin Clark</h4>
           <img class="plain" src="cartoon-webassembly.png">
           <aside class="notes">
+            Before I get started, I want to mention a really great series of
+            articles by Lin Clark, an engineer at Mozilla. She covers a number
+            of topics, including assembly languages, machine code, JITs and how
+            these apply to WebAssembly. In fact, I liked it so much, I stole
+            the visual style for the rest of the slides. :-)
           <aside>
         </section>
 
         <section>
           <img class="plain" src="logo-sketch.gif">
+          <aside class="notes">
+            There we go!
+          </aside>
         </section>
 
         <section>
           <img class="plain" src="web-assembly-name.gif">
           <aside class="notes">
+            Oh, as another aside: the name WebAssembly is kind funny. It's
+            primary use case is for the web, but it's also useful as a portable
+            executable for non-web environments too.
+            Also, it's not really an assembly language, but more of a virtual
+            ISA. But what's in a name anyway?
           <aside>
         </section>
 
         <section>
-          <ol>
-            <li class="purple"><b>WebAssembly Module Overview</b></li>
-            <li class="purple">New Languages</li>
-            <li class="purple">The Future</li>
-          </ol>
+          <img class="plain" src="section1.gif">
           <aside class="notes">
+            OK, let's look at what's in a WebAssembly module.
           <aside>
         </section>
 
         <section>
           <img class="plain" src="module2.gif">
           <aside class="notes">
+            A WebAssembly module is the container for everything. Think of it
+            as an executable for the WebAssembly virtual ISA.
           <aside>
         </section>
 
         <section>
           <img class="plain" src="functions2.gif">
           <aside class="notes">
+            The most important components of a module are the functions. They
+            work like functions for pretty much any language you've used: pass
+            in parameters, get a result. The parameters are only allowed to be
+            one of four types: i32, i64, f32, and f64.
           <aside>
         </section>
 
         <section>
           <img class="plain" src="function-internals.gif">
           <aside class="notes">
+            Here's an example of what a WebAssembly function looks like. This
+            is described using the WebAssembly text format. It has a one-to-one
+            mapping with the binary format. This function is an implementation
+            of a recursive factorial for i64 types.
           <aside>
         </section>
 
         <section>
           <img class="plain" src="function-calls2.gif">
           <aside class="notes">
+            Functions can call other functions inside the module.
           <aside>
         </section>
 
         <section>
           <img class="plain" src="function-imports.gif">
           <aside class="notes">
+            They can also call "imported" functions, provided by the embedder.
+            In most uses, the embedder will be JavaScript, but there are
+            non-JS embedders as well.
           <aside>
         </section>
 
         <section>
           <img class="plain" src="memory.gif">
           <aside class="notes">
+            Unlike JavaScript, WebAssembly does not have objects. All data is
+            written to "linear memory". It's called linear memory because it is
+            a continguous array of raw data. Memory can also be imported from
+            the embedder, but that isn't shown here.
           <aside>
         </section>
 
         <section>
           <img class="plain" src="memory-internals.gif">
           <aside class="notes">
+            Here's an example of data that could be stored in a module. As you
+            can see, it's just raw bytes. When compiling a language like
+            C++ to WebAssembly, all data is written here: read-only data,
+            uninitialized data, the data stack and the heap.
           <aside>
         </section>
 
         <section>
           <img class="plain" src="load-store.gif">
           <aside class="notes">
+            Functions can read from and write data to linear memory by using
+            the store and load instructions, in 1-, 2-, 4- and 8-byte sizes.
           <aside>
         </section>
 
         <section>
           <img class="plain" src="globals.gif">
           <aside class="notes">
+            The module can also contain global variables. These values could be
+            written to linear memory, but global variables are convenient
+            because they are named directly and typed. Global variables
+            can be mutable or immutable. Notice that global variables can also
+            be imported from the embedder.
           <aside>
         </section>
 
         <section>
           <img class="plain" src="globals-get-set.gif">
           <aside class="notes">
+            Functions can read from and write to global variables using the
+            get_global and set_global instructions.
           <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="tables.gif">
+          <aside class="notes">
+            Tables store references to other module components. They can also
+            be imported, just like memory, functions, and globals.
+          </aside>
+        </section>
+
+        <section>
+          <img class="plain" src="table-internals.gif">
+          <aside class="notes">
+            Currently, the only component that can be stored in a table is a
+            reference to a function.
+          </aside>
+        </section>
+
+        <section>
+          <img class="plain" src="indirect-calls.gif">
+          <aside class="notes">
+          </aside>
         </section>
 
         <section>
@@ -168,11 +242,19 @@
         </section>
 
         <section>
-          <ol>
-            <li class="purple">WebAssembly Module Overview</li>
-            <li class="purple"><b>New Languages</b></li>
-            <li class="purple">The Future</li>
-          </ol>
+          <img class="plain" src="export-js.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <img class="plain" src="section2.gif">
+          <aside class="notes">
+          <aside>
+        </section>
+
+        <section>
+          <h3>teavm</h3>
           <aside class="notes">
           <aside>
         </section>
@@ -190,11 +272,7 @@
         </section>
 
         <section>
-          <ol>
-            <li class="purple">WebAssembly Module Overview</li>
-            <li class="purple">New Languages</li>
-            <li class="purple"><b>The Future</b></li>
-          </ol>
+          <img class="plain" src="section3.gif">
           <aside class="notes">
           <aside>
         </section>
@@ -206,7 +284,7 @@
         </section>
 
         <section>
-          <h3>JIT (Just-In-Time) Support</h3>
+          <h3>Thanks!</h3>
           <aside class="notes">
           <aside>
         </section>
