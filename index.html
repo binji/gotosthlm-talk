@@ -232,12 +232,23 @@
         <section>
           <img class="plain" src="indirect-calls.gif">
           <aside class="notes">
+            This allows you to perform indirect calls. Normally a function call
+            references the function it will call directly, as part of the
+            instruction. An indirect function call references an index in the
+            table instead.
           </aside>
         </section>
 
         <section>
           <img class="plain" src="exports.gif">
           <aside class="notes">
+            Functions, Globals, Memories, and Tables all can be exported, even
+            if they were originally imported. In this picture, the two
+            functions and the imported global with a purple border are
+            exported.
+
+            An exported function can be called by the embedder. An exported
+            global can be read (but not modified).
           <aside>
         </section>
 
